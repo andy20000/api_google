@@ -17,11 +17,11 @@ if (mysqli_num_rows($result) > 0) {
     }
 } else {
   echo "0 results";
+
 }
 //echo "<br>";
 //print_r($array);
 mysqli_close($conn);
-
 
 for ($i = 0; $i < count($array); $i++)
 {

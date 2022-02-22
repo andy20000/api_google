@@ -16,24 +16,48 @@ if(isset($_GET['db_id_origen']) && isset($_GET['lat_origen']) && isset($_GET['lo
     $status = $google_maps_array["rows"][0]["elements"][0]["status"];
 
     if($status != "OK"){
-        echo $status;
+
+                         if($status == null || $status = "ZERO_RESULTS" ||  $json['insercion datos']=false   ){         
+                                         $api['operacion']=false;
+                                         echo json_encode($api);
+                                         $json['internet']=false ;
+                                       }else{
+                     
+                                       $api['operacion']=true;             
+                                    echo json_encode($api);
+                                            }
+                             $json['status']=$status; 
+                             $json['datos correctos']=$_GET['lat_origen'] && $_GET['lon_origen']  && $_GET['lat_destino']  && $_GET['lon_destino'] ;
+                             echo json_encode($json);
+        echo "stado". $status;
     } else {
         if($distancia = $google_maps_array["rows"][0]["elements"][0]["distance"]["value"]);
         {
             if($duracion = $google_maps_array["rows"][0]["elements"][0]["duration"]["value"]);
             {
                 $insertar = "INSERT INTO `ddodt` (`id`, `duracion`, `distancia`, `fecha`, `db_id_origen`, `lat_origen`, `lon_origen`, `db_id_destino`,  `lat_destino`, `lon_destino`) VALUES (NULL, $duracion, $distancia, NULL, $db_id_origen, $lat_origen, $lon_origen, $db_id_destino, $lat_destino, $lon_destino)";
-                $query =mysqli_query($conn, $insertar);
-                if($query){
+                $query =only( $insertar);
+                if($query){      //echo "el query fue guardado ".$query;
+                        
+                                $json['status']='ok';
+                                $api['operacion']=true;
+                                   echo json_encode($api);  
+                                $json['insercion datos']=$_GET['lat_origen'] && $_GET['lon_origen']  && $_GET['lat_destino']  && $_GET['lon_destino'] ;
+                                echo json_encode($json);       
 
-                }else{
+                }else{          $json['insercion datos']= false;
+                                $api['operacion']=false;
+                                echo json_encode($api);
+                                echo json_encode($json);
 
                 }
             }
         }
     }
-} else {
-    echo "faltan datos para efectuar la consulta";
-}
+} 
+
+//else {
+//    echo "faltan datos para efectuar la consulta";
+//}
 
 ?>

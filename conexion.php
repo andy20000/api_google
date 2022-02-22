@@ -1,18 +1,27 @@
 
-
 <?php 
 
 $servername = "localhost";
-$database = "duracion_distancia";
+$database = "google_api";
 $username = "root";
 $password = "";
 // Create connection
-$conn =  mysqli_connect($servername, $username, $password, $database);
+$conn = new  mysqli($servername, $username, $password, $database);
 // Check connection
 if (!$conn) {
-    //die("Connection failed: " . mysqli_connect_error());
+   die(
+
+
+   $d=	": " . connect_errno());
+
+         $json['conexion']=$d;
+              
+                
+                // echo json_encode($json);
 }
-//echo "Connected successfully";
+
+  $json['conexion']= true;
+  // echo json_encode($json);
 
 
  ?>
