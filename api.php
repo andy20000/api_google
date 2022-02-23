@@ -9,7 +9,7 @@ if(isset($_GET['db_id_origen']) && isset($_GET['lat_origen']) && isset($_GET['lo
     $db_id_destino = $_GET['db_id_destino'];
     $lat_destino = $_GET['lat_destino'];
     $lon_destino = $_GET['lon_destino'];
-    $google_maps_url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".urlencode($lat_origen)."%2c".urlencode($lon_origen)."&destinations=".urlencode($lat_destino)."%2c".urlencode($lon_destino)."&key=AIzaSyDq9HWFYk9w0o8CqY3HazYGY1qIdq1dj2A";
+    $google_maps_url = "https://maps.googleapis.com/maps/api/distancematrix/json?origins=".urlencode($lat_origen)."%2c".urlencode($lon_origen)."&destinations=".urlencode($lat_destino)."%2c".urlencode($lon_destino)."&key=AIzaSyBrh7xmiOzDG6TsQ5MEMxEe15720LGsIQo";
     $google_maps_json = file_get_contents($google_maps_url);
     $google_maps_array = json_decode($google_maps_json, true);
 
@@ -36,7 +36,7 @@ if(isset($_GET['db_id_origen']) && isset($_GET['lat_origen']) && isset($_GET['lo
             if($duracion = $google_maps_array["rows"][0]["elements"][0]["duration"]["value"]);
             {
                 $insertar = "INSERT INTO `ddodt` (`id`, `duracion`, `distancia`, `fecha`, `db_id_origen`, `lat_origen`, `lon_origen`, `db_id_destino`,  `lat_destino`, `lon_destino`) VALUES (NULL, $duracion, $distancia, NULL, $db_id_origen, $lat_origen, $lon_origen, $db_id_destino, $lat_destino, $lon_destino)";
-                $query =only( $insertar);
+                $query =mysqli_query($conn, $insertar);
                 if($query){      //echo "el query fue guardado ".$query;
                         
                                 $json['status']='ok';
@@ -54,10 +54,10 @@ if(isset($_GET['db_id_origen']) && isset($_GET['lat_origen']) && isset($_GET['lo
             }
         }
     }
-} 
+}
 
 //else {
-//    echo "faltan datos para efectuar la consulta";
+  //  echo "faltan datos para efectuar la consulta";
 //}
 
 ?>

@@ -17,26 +17,26 @@ if (mysqli_num_rows($result) > 0) {
     }
 } else {
   echo "0 results";
-
 }
 //echo "<br>";
 //print_r($array);
 mysqli_close($conn);
 
+
 for ($i = 0; $i < count($array); $i++)
 {
-    print_r($array[$i][0]);
-    echo "<br>";
+    //print_r($array[$i][0]);
+    //echo "<br>";
 
     for ($j = 0; $j < count($array); $j++)
     {
         if ($i != $j){
-            print_r($array[$i][0]);
-            echo " -> ";
-            print_r($array[$j][0]);
-            echo "<br>";
-            echo $query_api = "http://localhost/api_g/api.php?lat_origen=".urlencode(str_replace(",",".",$array[$i][3]))."&lon_origen=".urlencode(str_replace(",",".",$array[$i][2]))."&lat_destino=".urlencode(str_replace(",",".",$array[$j][3]))."&lon_destino=".urlencode(str_replace(",",".",$array[$j][2]));
-            echo "<br>";
+            //print_r($array[$i][0]);
+            //echo " -> ";
+            //print_r($array[$j][0]);
+            //echo "<br>";
+            $query_api = "http://localhost/google/api_google/api.php?db_id_origen=".urlencode(str_replace(",",".",$array[$i][0]))."&lat_origen=".urlencode(str_replace(",",".",$array[$i][3]))."&lon_origen=".urlencode(str_replace(",",".",$array[$i][2]))."&db_id_destino=".urlencode(str_replace(",",".",$array[$j][0]))."&lat_destino=".urlencode(str_replace(",",".",$array[$j][3]))."&lon_destino=".urlencode(str_replace(",",".",$array[$j][2]));
+            //echo "<br>";
             $respuesta_api = file_get_contents($query_api);
         }
     }
