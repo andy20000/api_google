@@ -3,7 +3,7 @@ require 'conexion.php';
 
 $array = array();
 
-$sql = "SELECT * FROM `intersecciones_semaforizadas`";
+$sql = "SELECT * FROM `interseccion_semaforizada`";
 $result = mysqli_query($conn, $sql);
 
 if (mysqli_num_rows($result) > 0) {
@@ -38,6 +38,8 @@ for ($i = 0; $i < count($array); $i++)
             $query_api = "http://localhost/google/api_google/api.php?db_id_origen=".urlencode(str_replace(",",".",$array[$i][0]))."&lat_origen=".urlencode(str_replace(",",".",$array[$i][3]))."&lon_origen=".urlencode(str_replace(",",".",$array[$i][2]))."&db_id_destino=".urlencode(str_replace(",",".",$array[$j][0]))."&lat_destino=".urlencode(str_replace(",",".",$array[$j][3]))."&lon_destino=".urlencode(str_replace(",",".",$array[$j][2]));
             //echo "<br>";
             $respuesta_api = file_get_contents($query_api);
+
+
         }
     }
 }
